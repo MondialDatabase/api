@@ -1,6 +1,7 @@
 -- Source: https://www.dbis.informatik.uni-goettingen.de/Mondial/
 
-ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+-- ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+SET DATESTYLE = "ISO, YMD"; -- Roughly the PostgreSQL equivalent of the above statement.
  INSERT INTO country VALUES ('Albania','AL','Tirana','Albania',28750,2821977);
  INSERT INTO country VALUES ('Greece','GR','Athina','Attikis',131940,10816286);
  INSERT INTO country VALUES ('Macedonia','MK','Skopje','Macedonia',25333,2059794);

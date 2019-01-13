@@ -1,7 +1,8 @@
 -- Source: https://www.dbis.informatik.uni-goettingen.de/Mondial/
 
-ALTER SESSION SET NLS_DATE_FORMAT = 'DD MM SYYYY';
+-- ALTER SESSION SET NLS_DATE_FORMAT = 'DD MM SYYYY';
 -- SYYYY means 4-digit-year, S prefixes BC years with "-"
+SET DATESTYLE = "ISO, DMY"; -- Roughly the PostgreSQL equivalent of the above statement.
 
 CREATE TABLE Country
 (Name VARCHAR(50) NOT NULL UNIQUE,
