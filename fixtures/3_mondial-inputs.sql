@@ -3801,7 +3801,8 @@ COMMIT;
  INSERT INTO countrypops VALUES ('BVIR',1970,9672);
  INSERT INTO countrypops VALUES ('BVIR',1980,10985);
  INSERT INTO countrypops VALUES ('BVIR',1991,16115);
- INSERT INTO countrypops VALUES ('BVIR',2001,23161);
+ -- This entry violates a unique constraint on country and year with the next entry.
+ -- INSERT INTO countrypops VALUES ('BVIR',2001,23161);
  INSERT INTO countrypops VALUES ('BVIR',2001,28054);
  INSERT INTO countrypops VALUES ('CDN',1871,3689257);
  INSERT INTO countrypops VALUES ('CDN',1881,4324810);
@@ -18044,7 +18045,8 @@ COMMIT;
  INSERT INTO citypops VALUES ('Korhogo','CI','Savanes',1988,109445);
  INSERT INTO citypops VALUES ('Korhogo','CI','Savanes',1998,142039);
  INSERT INTO citypops VALUES ('Korhogo','CI','Savanes',2014,245239);
- INSERT INTO citypops VALUES ('Bouaké','CI','Vallée du Bandama',1988,175264);
+  -- This entry violates a unique constraint on country, province, city, year with the next entry.
+ -- INSERT INTO citypops VALUES ('Bouaké','CI','Vallée du Bandama',1988,175264);
  INSERT INTO citypops VALUES ('Bouaké','CI','Vallée du Bandama',1988,329850);
  INSERT INTO citypops VALUES ('Bouaké','CI','Vallée du Bandama',1998,461618);
  INSERT INTO citypops VALUES ('Bouaké','CI','Vallée du Bandama',2014,536719);
@@ -46485,7 +46487,8 @@ COMMIT;
  INSERT INTO airport VALUES ('WXN','Wanzhou Wuqiao Airport','CN','Wanxian','Sichuan',NULL,30.8361,108.406,567,8);
  INSERT INTO airport VALUES ('WUH','Tianhe','CN','Wuhan','Hubei',NULL,30.783758,114.2081,34,8);
  INSERT INTO airport VALUES ('WUX','Wuxi Airport','CN','Wuxi','Jiangsu',NULL,31.4944,120.429,5,8);
- INSERT INTO airport VALUES ('FOC','Fuzhou Changle','CN','Fuzhou','Fujian',NULL,25.93,119.65,14,8);
+ -- This entry violates the unique primary key constraint with an entry further down in the fixture data
+ -- INSERT INTO airport VALUES ('FOC','Fuzhou Changle','CN','Fuzhou','Fujian',NULL,25.93,119.65,14,8);
  INSERT INTO airport VALUES ('WNZ','Wenzhou Longwan Airport','CN','Wenzhou','Zhejiang',NULL,27.9122,120.852,NULL,8);
  INSERT INTO airport VALUES ('INC','Yinchuan','CN','Yinchuan','Ningxia',NULL,38.481944,106.009167,1098,8);
  INSERT INTO airport VALUES ('ZUH','Zhuhai Airport','CN','Zhuhai','Guangdong',NULL,22.0064,113.376,7,8);
