@@ -11,17 +11,11 @@ public class MyDatabaseResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getSomethingFromDB() {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Failed to connect to database.";
-        }
-
         String response = "";
         String JDBCPostgreSQLConnectionString = "jdbc:postgresql://db-server:5432/postgres?user=postgres";
 
         try {
+            Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection(JDBCPostgreSQLConnectionString);
 
             Statement statement = connection.createStatement();
@@ -33,6 +27,9 @@ public class MyDatabaseResource {
         } catch (SQLException e) {
             e.printStackTrace();
             response = "Failed to execute query";
+        } catch (Exception e) {
+            e.printStackTrace();
+            response = "Failed to connect to database.";
         }
 
         return response;
