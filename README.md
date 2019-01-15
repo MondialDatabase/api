@@ -21,3 +21,12 @@ The Web API runs on a Tomcat (9.x) server.
     1. Set the Server to Docker
     2. Set the compose file to the *docker-compose.yml* in this directory.
     3. Check the option to force rebuilds.
+6. Configure other quality of life configuration:
+    1. Set the Database Explorer to PostgresSQL using the following settings:
+        1. Host: `localhost`
+        2. Username: `postgres`
+        3. Database: `postgres`
+        4. Port: `5432`
+    2. Configure the debugger configuration:
+        1. Create a new Remote debugger.
+        2. Set the port number to `8000`.
