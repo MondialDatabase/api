@@ -21,6 +21,7 @@ The Web API runs on a Tomcat (9.x) server.
     1. Set the Server to Docker
     2. Set the compose file to the *docker-compose.yml* in this directory.
     3. Check the option to force rebuilds.
+    4. Set Build Artifact: WAR to run before launch.
 6. Configure other quality of life configuration:
     1. Set the Database Explorer to PostgresSQL using the following settings:
         1. Host: `localhost`
