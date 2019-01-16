@@ -10,7 +10,16 @@ Build artifacts are produced using Maven (3.x).
 
 The Web API runs on a Tomcat (9.x) server.
 
-## Getting Started
+## Running the Web API
+
+NOTE: For API development, see the Development Environment Setup section instead.
+For serving the Web API for use with web clients:
+
+1. Install Docker CE.
+2. Change into the project directory.
+3. Run `sh start.sh` to build the project source code and start the web services.
+
+## Development Environment Setup 
 
 1. Install Docker CE.
 1. Install IntelliJ IDEA Ultimate with all plugins enabled.
@@ -31,3 +40,6 @@ The Web API runs on a Tomcat (9.x) server.
     2. Configure the debugger configuration:
         1. Create a new Remote debugger.
         2. Set the port number to `8000`.
+
+
+The Web API will be served at `localhost:8080/api/webapi`.
