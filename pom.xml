@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>edu.kennesaw.ksuweb.bsetzer.cs8990.fall2014.projects</groupId>
+    <groupId>edu.kennesaw.ksuweb.bsetzer.cs8990.fall2014.project.mondial</groupId>
     <artifactId>mondial-server</artifactId>
     <packaging>war</packaging>
     <version>0.01</version>

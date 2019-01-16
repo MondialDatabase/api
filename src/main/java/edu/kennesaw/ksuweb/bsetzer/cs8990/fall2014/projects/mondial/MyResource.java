@@ -1,4 +1,4 @@
-package edu.kennesaw.ksuweb.bsetzer.cs8990.fall2014.projects;
+package edu.kennesaw.ksuweb.bsetzer.cs8990.fall2014.projects.mondial;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
