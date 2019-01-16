@@ -1,9 +1,11 @@
 <html>
-<body>
-    <h2>Jersey RESTful Web Application!</h2>
-    <p><a href="webapi/myresource">Jersey resource</a>
-    <p><a href="webapi/mydatabaseresource">Jersey database backed resource</a></p>
-    <p>Visit <a href="http://jersey.java.net">Project Jersey website</a>
-    for more information on Jersey!
-</body>
+    <body>
+        <h1>Mondial Server REST API Browser</h1>
+
+        <h2>Sample Resource (for testing basic API access)</h2>
+        <p><a href="webapi/myresource">GET /myresource</a></p>
+
+        <h2>Country Resource</h2>
+        <p><a href="webapi/country">GET /country</a></p>
+    </body>
 </html>
