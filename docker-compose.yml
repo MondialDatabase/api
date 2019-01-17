@@ -8,8 +8,8 @@ services:
       - "8080:8080"
       - "8000:8000"
   db-server:
-    build:
-      context: .
-      dockerfile: ./docker/db-server/Dockerfile
+    image: postgres:11
+    volumes:
+      - ./db-target:/var/lib/postgresql/data
     ports:
       - "5432:5432"
