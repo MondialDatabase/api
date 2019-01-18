@@ -52,4 +52,4 @@ For serving the Web API for use with web clients:
             1. Set the port number to `8000`.
 
 
-The Web API will be served at `localhost:8080/api/webapi`.
+The Web API will be served at `localhost:8080/api`.
