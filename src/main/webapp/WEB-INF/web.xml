@@ -9,6 +9,16 @@
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api</param-value>
         </init-param>
+        <init-param>
+            <param-name>jersey.config.server.provider.classnames</param-name>
+            <param-value>
+                org.glassfish.jersey.message.filtering.SelectableEntityFilteringFeature
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>jersey.config.entityFiltering.selectable.query</param-name>
+            <param-value>select</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>

@@ -18,8 +18,8 @@
                 <version>2.5.1</version>
                 <inherited>true</inherited>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>10</source>
+                    <target>10</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -59,6 +59,12 @@
             <artifactId>jersey-media-json-jackson</artifactId>
             <version>2.27</version>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.ext</groupId>
+            <artifactId>jersey-entity-filtering</artifactId>
+            <version>2.27</version>
+        </dependency>
+
         <!-- Only exists to avoid ClassDefNotFoundError when initially
              accessing a JSON endpoint after cold server boot -->
         <dependency>
