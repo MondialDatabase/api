@@ -5,7 +5,8 @@ FROM tomcat:9-jre11
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy WAR file into Tomcat webapps directory
-COPY ./target/mondial-server.war /usr/local/tomcat/webapps/api.war
+# Renaming to ROOT.war to mount the application at the server root
+COPY ./target/mondial-server.war /usr/local/tomcat/webapps/ROOT.war
 
 # Add environment variables for Tomcat JPDA support
 ENV JPDA_ADDRESS="*:8000"
