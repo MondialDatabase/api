@@ -1,15 +1,23 @@
-version: "3"
+version: "3.5"
+networks:
+  mondial:
+    name: mondial
 services:
   api-server:
+    image: mondial-api
     build:
       context: .
       dockerfile: ./docker/api-server/Dockerfile
     ports:
       - "8080:8080"
       - "8000:8000"
+    networks:
+      - mondial
   db-server:
     image: postgres:11
     volumes:
       - ./db-target:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - mondial
