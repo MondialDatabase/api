@@ -49,7 +49,8 @@ For serving the Web API for use with web clients:
 6. Configure the test configuration:
     1. Add a JUnit configuration:
         1. Set the Test Kind to be "All in Package" and specify the project package name.
-        2. Ensure that Search For Tests is set to look through the whole project.
+        2. Ensure that Search For Tests is set to look through a single module.
+        3. Ensure the ClassPath of the module to use is set to the project module.
         3. Ensure the JRE Version is set to 11.
         4. Set Build to run before launch.
     NOTE: The build and run configuration must be manually run before the test configuration. This is due to the fact
