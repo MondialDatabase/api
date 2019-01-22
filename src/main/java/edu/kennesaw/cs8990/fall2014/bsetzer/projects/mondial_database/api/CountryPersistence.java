@@ -7,8 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountryPersistence {
-    public static List<Country> getAllCountries() throws Exception {
+class CountryPersistence {
+    static List<Country> getAllCountries() throws Exception {
         List<Country> countryList = new ArrayList<Country>();
         String JDBCPostgreSQLConnectionString = "jdbc:postgresql://db-server:5432/postgres?user=postgres";
         String countriesQuery = "SELECT name, code, capital, province, area, population from country";
@@ -19,13 +19,14 @@ public class CountryPersistence {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(countriesQuery)) {
             while (resultSet.next()) {
-                Country country = new Country();
-                country.setName(resultSet.getString("name"));
-                country.setCode(resultSet.getString("code"));
-                country.setCapital(resultSet.getString("capital"));
-                country.setProvince(resultSet.getString("province"));
-                country.setArea(resultSet.getBigDecimal("area"));
-                country.setPopulation(resultSet.getBigDecimal("population"));
+                Country country = new Country()
+                        .setName(resultSet.getString("name"))
+                        .setCode(resultSet.getString("code"))
+                        .setCapital(resultSet.getString("capital"))
+                        .setProvince(resultSet.getString("province"))
+                        .setArea(resultSet.getBigDecimal("area"))
+                        .setPopulation(resultSet.getBigDecimal("population"));
+
                 countryList.add(country);
             }
         }
