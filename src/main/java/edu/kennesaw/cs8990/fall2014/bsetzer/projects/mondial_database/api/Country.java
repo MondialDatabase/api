@@ -14,47 +14,53 @@ public class Country {
         return this.name;
     }
 
-    public void setName(String name) {
+    public Country setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getCode() {
         return this.code;
     }
 
-    public void setCode(String code) {
+    public Country setCode(String code) {
         this.code = code;
+        return this;
     }
 
     public String getCapital() {
         return this.capital;
     }
 
-    public void setCapital(String capital) {
+    public Country setCapital(String capital) {
         this.capital = capital;
+        return this;
     }
 
     public String getProvince() {
         return this.province;
     }
 
-    public void setProvince(String province) {
+    public Country setProvince(String province) {
         this.province = province;
+        return this;
     }
 
     public BigDecimal getArea() {
         return this.area;
     }
 
-    public void setArea(BigDecimal area) {
+    public Country setArea(BigDecimal area) {
         this.area = area;
+        return this;
     }
 
     public BigDecimal getPopulation() {
         return this.population;
     }
 
-    public void setPopulation(BigDecimal population) {
+    public Country setPopulation(BigDecimal population) {
         this.population = population;
+        return this;
     }
 }
