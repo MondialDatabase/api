@@ -8,12 +8,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import javax.ws.rs.core.*;
-import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 
 public class CountryResourceIntegrationTest extends JerseyTest {
-    final int NUMBER_OF_COUNTRIES = 244;
+    private final int NUMBER_OF_COUNTRIES = 244;
 
     @Override
     protected Application configure() {
@@ -99,6 +98,10 @@ public class CountryResourceIntegrationTest extends JerseyTest {
                 countryToTest.getName().length() > 0);
         Assert.assertTrue("HTTP body should have the serialized code for each country (test: United States):",
                 countryToTest.getCode().length() > 0);
+
+        // Test that the other property values are not included in the response
+        // Unfortunately this is not good enough to test if the fields themselves
+        // were completely excluded or not.
         Assert.assertTrue("HTTP body should not have the serialized capital for each country (test: United States):",
                 countryToTest.getCapital() == null);
         Assert.assertTrue("HTTP body should not have the serialized province for each country (test: United States):",
