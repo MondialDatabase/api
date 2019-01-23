@@ -51,8 +51,8 @@ For serving the Web API for use with web clients:
         1. Set the Test Kind to be "All in Package" and specify the project package name.
         2. Ensure that Search For Tests is set to look through a single module.
         3. Ensure the ClassPath of the module to use is set to the project module.
-        3. Ensure the JRE Version is set to 11.
-        4. Set Build to run before launch.
+        4. Ensure the JRE Version is set to 11.
+        5. Set Build to run before launch.
     NOTE: The build and run configuration must be manually run before the test configuration. This is due to the fact
     that the integration tests run against an actual server environment.
 7. Configure other quality of life configuration:
