@@ -20,7 +20,7 @@ For serving the Web API for use with web clients:
 3. Run `sh build-api.sh` to build the project source code.
 4. Run `sh build-db.sh` to build the project Mondial database.
    NOTE: This will not do a clean rebuild of the database. If this is desired (e.g. due to a schema change), execute
-   an `rm -r db-target` command first.
+   an `docker volume rm mondial-database-data` command first.
 3. Run `docker-compose up --build` to start the web services. To shut down the web services, run `docker-compose down`.
 
 ## Running Tests for the Web API
