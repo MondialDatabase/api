@@ -16,8 +16,11 @@ services:
   db-server:
     image: postgres:11
     volumes:
-      - ./db-target:/var/lib/postgresql/data
+      - mondial-database-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
       - mondial
+volumes:
+  mondial-database-data:
+    external: true
