@@ -1,7 +1,4 @@
 version: "3.5"
-networks:
-  mondial:
-    name: mondial
 services:
   api-server:
     image: mondial-api
@@ -11,16 +8,12 @@ services:
     ports:
       - "8080:8080"
       - "8000:8000"
-    networks:
-      - mondial
   db-server:
     image: postgres:11
     volumes:
       - mondial-database-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    networks:
-      - mondial
 volumes:
   mondial-database-data:
     external: true
