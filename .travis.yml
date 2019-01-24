@@ -1,0 +1,11 @@
+# Java 11
+language: java
+jdk:
+  - oraclejdk11
+
+# Define a build matrix; this will allow unit tests and end to end tests to run separately
+env:
+  - TEST_CATEGORIES="edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.UnitTest"
+
+# Run the appropriate test suite for the build environment
+script: mvn test -B -Dgroups="$TEST_CATEGORIES"

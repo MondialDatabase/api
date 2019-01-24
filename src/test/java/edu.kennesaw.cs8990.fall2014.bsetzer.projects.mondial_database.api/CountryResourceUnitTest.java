@@ -3,12 +3,14 @@ package edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api;
 import mockit.*;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Category(UnitTest.class)
 public class CountryResourceUnitTest {
     @Test
     public void testCountryResourcesGetCountriesFromPersistence() throws Exception {

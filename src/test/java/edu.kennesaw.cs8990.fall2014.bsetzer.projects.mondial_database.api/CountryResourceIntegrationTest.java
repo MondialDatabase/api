@@ -6,11 +6,13 @@ import org.glassfish.jersey.test.external.ExternalTestContainerFactory;
 import org.glassfish.jersey.test.spi.TestContainerFactory;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import javax.ws.rs.core.*;
 import java.net.URI;
 import java.util.List;
 
+@Category(IntegrationTest.class)
 public class CountryResourceIntegrationTest extends JerseyTest {
     private final int NUMBER_OF_COUNTRIES = 244;
 
