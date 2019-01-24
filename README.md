@@ -25,8 +25,14 @@ For serving the Web API for use with web clients:
 
 ## Running Tests for the Web API
 
+## Running Unit Tests
+
+1. Run `sh test-unit.sh`.
+
+## Running Integration Tests
+
 1. Follow instructions for Running the Web API.
-2. Run `sh test-api.sh` while the web services are running.
+2. Run `sh test-integration.sh` while the web services are running.
 
 ## Development Environment Setup 
 
