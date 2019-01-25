@@ -4,16 +4,7 @@ services:
     image: mondial-api
     build:
       context: .
-      dockerfile: ./docker/api-server/Dockerfile
+      dockerfile: ./Dockerfile
     ports:
       - "8080:8080"
       - "8000:8000"
-  db-server:
-    image: postgres:11
-    volumes:
-      - mondial-database-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-volumes:
-  mondial-database-data:
-    external: true

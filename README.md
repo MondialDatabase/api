@@ -18,10 +18,11 @@ For serving the Web API for use with web clients:
 1. Install Docker CE.
 2. Change into the project directory.
 3. Run `sh build-api.sh` to build the project source code.
-4. Run `sh build-db.sh` to build the project Mondial database.
-   NOTE: This will not do a clean rebuild of the database. If this is desired (e.g. due to a schema change), execute
-   an `docker volume rm mondial-database-data` command first.
-3. Run `docker-compose -p mondial up --build` to start the web services.
+4. Run `docker-compose -p mondial up --build` to start the web services.
+
+Note that a database connection will be needed for most, if not all, API functionality
+to work. The Web API expects the database to be available under the hostname `db-server`,
+on port `5432`, with a username and database name of `postgres`.
 
 To shut down the web services, run `docker-compose -p mondial down`.
 
@@ -33,7 +34,8 @@ To shut down the web services, run `docker-compose -p mondial down`.
 
 ## Running Integration Tests
 
-1. Follow instructions for Running the Web API.
+1. Follow instructions for Running the Web API. Note that without an active database service as well,
+   most, if not all, integration tests will fail.
 2. Run `sh test-integration.sh` while the web services are running.
 
 ## Development Environment Setup 
@@ -44,16 +46,11 @@ To shut down the web services, run `docker-compose -p mondial down`.
 3. Import the project into IntelliJ IDEA.
 4. You may be asked that "Maven Projects need to be imported"; click Import Changes if so.
 5. Configure the build and run configuration:
-    1. Add a Bash configuration:
-        1. Set the script to the *build-db.sh* in this directory.
-        2. Set the working directory to the project directory.
-        3. Set the interpreter to a shell executable e.g. `/bin/sh`.
     2. Add a Docker Compose configuration:
         1. Set the Server to Docker
         2. Set the compose file to the *docker-compose.yml* in this directory.
         3. Check the option to force rebuilds.
-        4. Set the bash configuration defined in the previous step to run before launch.
-        5. Set Build Artifact: WAR to run before launch.
+        4. Set Build Artifact: WAR to run before launch.
 6. Configure the test configuration:
     1. Add a JUnit configuration:
         1. Set the Test Kind to be "All in Package" and specify the project package name.
@@ -64,12 +61,7 @@ To shut down the web services, run `docker-compose -p mondial down`.
     NOTE: The build and run configuration must be manually run before the test configuration. This is due to the fact
     that the integration tests run against an actual server environment.
 7. Configure other quality of life configuration:
-    1. Set the Database Explorer to PostgresSQL using the following settings:
-        1. Host: `localhost`
-        2. Username: `postgres`
-        3. Database: `postgres`
-        4. Port: `5432`
-    2. Configure the debugger configuration:
+    1. Configure the debugger configuration:
         1. Add a Remote configuration.
             1. Set the port number to `8000`.
     NOTE: The build and run configuration should be manually run before the debugger configuration.
