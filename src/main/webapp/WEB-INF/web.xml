@@ -12,6 +12,7 @@
         <init-param>
             <param-name>jersey.config.server.provider.classnames</param-name>
             <param-value>
+                org.glassfish.jersey.jackson.JacksonFeature,
                 org.glassfish.jersey.message.filtering.SelectableEntityFilteringFeature
             </param-value>
         </init-param>
