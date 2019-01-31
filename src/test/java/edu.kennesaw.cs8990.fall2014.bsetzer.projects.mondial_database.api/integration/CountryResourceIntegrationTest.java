@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import javax.ws.rs.core.*;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -21,7 +22,9 @@ public class CountryResourceIntegrationTest extends JerseyTest {
     private final String NON_EXISTENT_COUNTRY_CODE = "CountryCodeThatDoesNotExist";
     private final Country TEST_COUNTRY = new Country()
             .setName("United States")
-            .setCode("USA");
+            .setCode("USA")
+            .setCapital("Washington")
+            .setProvince("District of Columbia");
 
     @Override
     protected Application configure() {
@@ -57,24 +60,37 @@ public class CountryResourceIntegrationTest extends JerseyTest {
         Assert.assertTrue("HTTP Body should have a serialized list of all countries:",
                 countryList.size() == NUMBER_OF_COUNTRIES);
 
-        // Test that an expected country is present in the Country List and defines the correct data fields.
+        countryList.stream().forEach(country -> {
+            // Ensure fields that cannot have null values are properly defined
+            Assert.assertTrue("HTTP body should have the serialized name for each country:",
+                    country.getName() instanceof String);
+            Assert.assertTrue("HTTP body should have the serialized code for each country:",
+                    country.getCode() instanceof String);
+            Assert.assertTrue("HTTP body should have the serialized area for each country:",
+                    country.getArea().doubleValue() > 0);
+            Assert.assertTrue("HTTP body should have the serialized population for each country:",
+                    country.getPopulation().intValue() > 0);
+        });
+
+        // Test that an expected country is present in the Country List and defines the correct data fields and values.
         // If one country is correctly returned in the Response Body, then most likely all the others are as well.
+
         Country countryToTest = countryList.stream()
                 .filter(country -> country.getName().equals(TEST_COUNTRY.getName()))
                 .findAny()
                 .orElseThrow();
 
-        Assert.assertTrue("HTTP body should have the serialized name for each country (test country):",
+        Assert.assertTrue("HTTP body should have the serialized name for the expected country:",
                 countryToTest.getName().equals(TEST_COUNTRY.getName()));
-        Assert.assertTrue("HTTP body should have the serialized code for each country (test country):",
+        Assert.assertTrue("HTTP body should have the serialized code for the expected country:",
                 countryToTest.getCode().equals(TEST_COUNTRY.getCode()));
-        Assert.assertTrue("HTTP body should have the serialized capital for each country (test country):",
-                countryToTest.getCapital().length() > 0);
-        Assert.assertTrue("HTTP body should have the serialized province for each country (test country):",
-                countryToTest.getProvince().length() > 0);
-        Assert.assertTrue("HTTP body should have the serialized area for each country (test country):",
+        Assert.assertTrue("HTTP body should have the serialized capital for the expected country:",
+                countryToTest.getCapital().equals(TEST_COUNTRY.getCapital()));
+        Assert.assertTrue("HTTP body should have the serialized province for the expected country:",
+                countryToTest.getProvince().equals(TEST_COUNTRY.getProvince()));
+        Assert.assertTrue("HTTP body should have the serialized area for the expected country:",
                 countryToTest.getArea().doubleValue() > 0);
-        Assert.assertTrue("HTTP body should have the serialized population for each country (test country):",
+        Assert.assertTrue("HTTP body should have the serialized population for the expected country:",
                 countryToTest.getPopulation().intValue() > 0);
     }
 
@@ -96,7 +112,27 @@ public class CountryResourceIntegrationTest extends JerseyTest {
         Assert.assertTrue("HTTP Body should have a serialized list of all countries:",
                 countryList.size() == NUMBER_OF_COUNTRIES);
 
-        // Test that an expected country is present in the Country List and defines the correct data fields.
+        countryList.stream().forEach(country -> {
+            // Ensure the requested fields that cannot have null values are properly defined
+            Assert.assertTrue("HTTP body should have the serialized name for each country:",
+                    country.getName() instanceof String);
+            Assert.assertTrue("HTTP body should have the serialized code for each country:",
+                    country.getCode() instanceof String);
+
+            // Test that the other property values are not included in the response
+            // Unfortunately this is not good enough to test if the fields themselves
+            // were completely excluded from the response.
+            Assert.assertTrue("HTTP body should not have the serialized capital for each country:",
+                    country.getCapital() == null);
+            Assert.assertTrue("HTTP body should not have the serialized province for each country:",
+                    country.getProvince() == null);
+            Assert.assertTrue("HTTP body should not have the serialized area for each country:",
+                    country.getArea() == null);
+            Assert.assertTrue("HTTP body should not have the serialized population for each country:",
+                    country.getPopulation() == null);
+        });
+
+        // Test that an expected country is present in the Country List and defines the correct data fields and values.
         // If one country is correctly returned in the Response Body, then most likely all the others are as well.
         Country countryToTest = countryList.stream()
                 .filter(country -> country.getName().equals(TEST_COUNTRY.getName()))
@@ -110,7 +146,7 @@ public class CountryResourceIntegrationTest extends JerseyTest {
 
         // Test that the other property values are not included in the response
         // Unfortunately this is not good enough to test if the fields themselves
-        // were completely excluded or not.
+        // were completely excluded from the response.
         Assert.assertTrue("HTTP body should not have the serialized capital for each country (test country):",
                 countryToTest.getCapital() == null);
         Assert.assertTrue("HTTP body should not have the serialized province for each country (test country):",
@@ -136,14 +172,15 @@ public class CountryResourceIntegrationTest extends JerseyTest {
         // Test that Response Body is parse-able to a Country Object.
         Country country = response.readEntity(new GenericType<Country>(){});
 
+        // Test that the country has the expected fields and values
         Assert.assertTrue("HTTP body should have the serialized name (test country):",
                 country.getName().equals(TEST_COUNTRY.getName()));
         Assert.assertTrue("HTTP body should have the serialized code (test country):",
                 country.getCode().equals(TEST_COUNTRY.getCode()));
         Assert.assertTrue("HTTP body should have the serialized capital (test country):",
-                country.getCapital().length() > 0);
+                country.getCapital().equals(TEST_COUNTRY.getCapital()));
         Assert.assertTrue("HTTP body should have the serialized province (test country):",
-                country.getProvince().length() > 0);
+                country.getProvince().equals(TEST_COUNTRY.getProvince()));
         Assert.assertTrue("HTTP body should have the serialized area (test country):",
                 country.getArea().doubleValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized population (test country):",
@@ -166,10 +203,15 @@ public class CountryResourceIntegrationTest extends JerseyTest {
         // Test that Response Body is parse-able to a Country Object.
         Country country = response.readEntity(new GenericType<Country>(){});
 
+        // Test that the country has the expected fields and values
         Assert.assertTrue("HTTP body should have the serialized name (test country):",
                 country.getName().equals(TEST_COUNTRY.getName()));
         Assert.assertTrue("HTTP body should have the serialized code (test country):",
                 country.getCode().equals(TEST_COUNTRY.getCode()));
+
+        // Test that the other property values are not included in the response
+        // Unfortunately this is not good enough to test if the fields themselves
+        // were completely excluded from the response.
         Assert.assertTrue("HTTP body should not have the serialized capital (test country):",
                 country.getCapital() == null);
         Assert.assertTrue("HTTP body should not have the serialized province (test country):",
@@ -210,6 +252,7 @@ public class CountryResourceIntegrationTest extends JerseyTest {
         // Test that Response Body is parse-able to a CountryDataQueryResult Object.
         CountryDataQueryResult countryDataQueryResult = response.readEntity(new GenericType<CountryDataQueryResult>(){});
 
+        // Test that the country data query result has the expected fields and values
         Assert.assertTrue("HTTP body should have the serialized country name (test country):",
                 countryDataQueryResult.getCountry().equals(TEST_COUNTRY.getName()));
         Assert.assertTrue("HTTP body should have the serialized population (test country):",
@@ -217,7 +260,7 @@ public class CountryResourceIntegrationTest extends JerseyTest {
         Assert.assertTrue("HTTP body should have the serialized area (test country):",
                 countryDataQueryResult.getArea().doubleValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized capital (test country):",
-                countryDataQueryResult.getCapital().length() > 0);
+                countryDataQueryResult.getCapital().equals(TEST_COUNTRY.getCapital()));
         Assert.assertTrue("HTTP body should have the serialized infant mortality (test country):",
                 countryDataQueryResult.getInfantMortality().doubleValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized population growth rate (test country):",
@@ -281,6 +324,9 @@ public class CountryResourceIntegrationTest extends JerseyTest {
         // Test that Response Body is parse-able to a CountryDataQueryResult Object.
         CountryDataQueryResult countryDataQueryResult = response.readEntity(new GenericType<CountryDataQueryResult>(){});
 
+        // Test that the country data query result has the expected fields and values
+        // for the specified fields. Unfortunately this is not good enough to test
+        // if the non-specified fields were completely excluded from the response.
         Assert.assertTrue("HTTP body should not have the serialized country name (test country):",
                 countryDataQueryResult.getCountry() == null);
         Assert.assertTrue("HTTP body should not have the serialized population (test country):",
