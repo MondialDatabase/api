@@ -1,5 +1,7 @@
-package edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api;
+package edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.integration;
 
+import edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.model.Country;
+import edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.model.CountryDataQueryResult;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
 import org.glassfish.jersey.test.external.ExternalTestContainerFactory;
@@ -205,61 +207,61 @@ public class CountryResourceIntegrationTest extends JerseyTest {
         Assert.assertEquals("HTTP Content-Type should be JSON:",
                 MediaType.APPLICATION_JSON, response.getHeaderString(HttpHeaders.CONTENT_TYPE));
 
-        // Test that Response Body is parse-able to a CountryData Object.
-        CountryData countryData = response.readEntity(new GenericType<CountryData>(){});
+        // Test that Response Body is parse-able to a CountryDataQueryResult Object.
+        CountryDataQueryResult countryDataQueryResult = response.readEntity(new GenericType<CountryDataQueryResult>(){});
 
         Assert.assertTrue("HTTP body should have the serialized country name (test country):",
-                countryData.getCountry().equals(TEST_COUNTRY.getName()));
+                countryDataQueryResult.getCountry().equals(TEST_COUNTRY.getName()));
         Assert.assertTrue("HTTP body should have the serialized population (test country):",
-                countryData.getPopulation().intValue() > 0);
+                countryDataQueryResult.getPopulation().intValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized area (test country):",
-                countryData.getArea().doubleValue() > 0);
+                countryDataQueryResult.getArea().doubleValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized capital (test country):",
-                countryData.getCapital().length() > 0);
+                countryDataQueryResult.getCapital().length() > 0);
         Assert.assertTrue("HTTP body should have the serialized infant mortality (test country):",
-                countryData.getInfantMortality().doubleValue() > 0);
+                countryDataQueryResult.getInfantMortality().doubleValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized population growth rate (test country):",
-                countryData.getPopulationGrowthRate().doubleValue() > 0);
+                countryDataQueryResult.getPopulationGrowthRate().doubleValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized government (test country):",
-                countryData.getGovernment().length() > 0);
+                countryDataQueryResult.getGovernment().length() > 0);
         Assert.assertTrue("HTTP body should have the serialized independence data (test country):",
-                countryData.getIndependenceData().length() > 0);
+                countryDataQueryResult.getIndependenceData().length() > 0);
         Assert.assertTrue("HTTP body should have the serialized GDP in millions USD (test country):",
-                countryData.getGdpInMillionsUsd().doubleValue() > 0);
+                countryDataQueryResult.getGdpInMillionsUsd().doubleValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized agriculture as percent of GDP (test country):",
-                countryData.getAgricultureAsPercentOfGdp().doubleValue() > 0);
+                countryDataQueryResult.getAgricultureAsPercentOfGdp().doubleValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized service as percent of GDP (test country):",
-                countryData.getServiceAsPercentOfGdp().doubleValue() > 0);
+                countryDataQueryResult.getServiceAsPercentOfGdp().doubleValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized industry as percent of GDP (test country):",
-                countryData.getIndustryAsPercentOfGdp().doubleValue() > 0);
+                countryDataQueryResult.getIndustryAsPercentOfGdp().doubleValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized inflation rate per annum (test country):",
-                countryData.getInflationRatePerAnnum().doubleValue() > 0);
+                countryDataQueryResult.getInflationRatePerAnnum().doubleValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized total length of border (test country):",
-                countryData.getTotalLengthOfBorder().doubleValue() > 0);
+                countryDataQueryResult.getTotalLengthOfBorder().doubleValue() > 0);
         Assert.assertTrue("HTTP body should have the serialized language data (test country):",
-                countryData.getLanguageData().size() > 0);
+                countryDataQueryResult.getLanguageData().size() > 0);
         Assert.assertTrue("HTTP body should have the serialized religion data (test country):",
-                countryData.getReligionData().size() > 0);
+                countryDataQueryResult.getReligionData().size() > 0);
         Assert.assertTrue("HTTP body should have the serialized ethnicity data (test country):",
-                countryData.getEthnicityData().size() > 0);
+                countryDataQueryResult.getEthnicityData().size() > 0);
         Assert.assertTrue("HTTP body should have the serialized bordering country data (test country):",
-                countryData.getBorderingCountryData().size() > 0);
+                countryDataQueryResult.getBorderingCountryData().size() > 0);
         Assert.assertTrue("HTTP body should have the serialized continent data (test country):",
-                countryData.getContinentData().size() > 0);
+                countryDataQueryResult.getContinentData().size() > 0);
         Assert.assertTrue("HTTP body should have the serialized city data (test country):",
-                countryData.getCityData().size() > 0);
+                countryDataQueryResult.getCityData().size() > 0);
         Assert.assertTrue("HTTP body should have the serialized mountain data (test country):",
-                countryData.getMountainData().size() > 0);
+                countryDataQueryResult.getMountainData().size() > 0);
         Assert.assertTrue("HTTP body should have the serialized sea data (test country):",
-                countryData.getSeaData().size() > 0);
+                countryDataQueryResult.getSeaData().size() > 0);
         Assert.assertTrue("HTTP body should have the serialized river data (test country):",
-                countryData.getRiverData().size() > 0);
+                countryDataQueryResult.getRiverData().size() > 0);
         Assert.assertTrue("HTTP body should have the serialized island data (test country):",
-                countryData.getIslandData().size() > 0);
+                countryDataQueryResult.getIslandData().size() > 0);
         Assert.assertTrue("HTTP body should have the serialized lake data (test country):",
-                countryData.getLakeData().size() > 0);
+                countryDataQueryResult.getLakeData().size() > 0);
         Assert.assertTrue("HTTP body should have the serialized desert data (test country):",
-                countryData.getDesertData().size() > 0);
+                countryDataQueryResult.getDesertData().size() > 0);
     }
 
     @Test
@@ -276,61 +278,61 @@ public class CountryResourceIntegrationTest extends JerseyTest {
         Assert.assertEquals("HTTP Content-Type should be JSON:",
                 MediaType.APPLICATION_JSON, response.getHeaderString(HttpHeaders.CONTENT_TYPE));
 
-        // Test that Response Body is parse-able to a CountryData Object.
-        CountryData countryData = response.readEntity(new GenericType<CountryData>(){});
+        // Test that Response Body is parse-able to a CountryDataQueryResult Object.
+        CountryDataQueryResult countryDataQueryResult = response.readEntity(new GenericType<CountryDataQueryResult>(){});
 
         Assert.assertTrue("HTTP body should not have the serialized country name (test country):",
-                countryData.getCountry() == null);
+                countryDataQueryResult.getCountry() == null);
         Assert.assertTrue("HTTP body should not have the serialized population (test country):",
-                countryData.getPopulation() == null);
+                countryDataQueryResult.getPopulation() == null);
         Assert.assertTrue("HTTP body should not have the serialized area (test country):",
-                countryData.getArea() == null);
+                countryDataQueryResult.getArea() == null);
         Assert.assertTrue("HTTP body should not have the serialized capital (test country):",
-                countryData.getCapital() == null);
+                countryDataQueryResult.getCapital() == null);
         Assert.assertTrue("HTTP body should not have the serialized infant mortality (test country):",
-                countryData.getInfantMortality() == null);
+                countryDataQueryResult.getInfantMortality() == null);
         Assert.assertTrue("HTTP body should not have the serialized population growth rate (test country):",
-                countryData.getPopulationGrowthRate() == null);
+                countryDataQueryResult.getPopulationGrowthRate() == null);
         Assert.assertTrue("HTTP body should not have the serialized government (test country):",
-                countryData.getGovernment() == null);
+                countryDataQueryResult.getGovernment() == null);
         Assert.assertTrue("HTTP body should not have the serialized independence data (test country):",
-                countryData.getIndependenceData() == null);
+                countryDataQueryResult.getIndependenceData() == null);
         Assert.assertTrue("HTTP body should not have the serialized GDP in millions USD (test country):",
-                countryData.getGdpInMillionsUsd() == null);
+                countryDataQueryResult.getGdpInMillionsUsd() == null);
         Assert.assertTrue("HTTP body should not have the serialized agriculture as percent of GDP (test country):",
-                countryData.getAgricultureAsPercentOfGdp() == null);
+                countryDataQueryResult.getAgricultureAsPercentOfGdp() == null);
         Assert.assertTrue("HTTP body should not have the serialized service as percent of GDP (test country):",
-                countryData.getServiceAsPercentOfGdp() == null);
+                countryDataQueryResult.getServiceAsPercentOfGdp() == null);
         Assert.assertTrue("HTTP body should not have the serialized industry as percent of GDP (test country):",
-                countryData.getIndustryAsPercentOfGdp() == null);
+                countryDataQueryResult.getIndustryAsPercentOfGdp() == null);
         Assert.assertTrue("HTTP body should not have the serialized inflation rate per annum (test country):",
-                countryData.getInflationRatePerAnnum() == null);
+                countryDataQueryResult.getInflationRatePerAnnum() == null);
         Assert.assertTrue("HTTP body should have the serialized total length of border (test country):",
-                countryData.getTotalLengthOfBorder().doubleValue() > 0);
+                countryDataQueryResult.getTotalLengthOfBorder().doubleValue() > 0);
         Assert.assertTrue("HTTP body should not have the serialized language data (test country):",
-                countryData.getLanguageData() == null);
+                countryDataQueryResult.getLanguageData() == null);
         Assert.assertTrue("HTTP body should not have the serialized religion data (test country):",
-                countryData.getReligionData() == null);
+                countryDataQueryResult.getReligionData() == null);
         Assert.assertTrue("HTTP body should not have the serialized ethnicity data (test country):",
-                countryData.getEthnicityData() == null);
+                countryDataQueryResult.getEthnicityData() == null);
         Assert.assertTrue("HTTP body should have the serialized bordering country data (test country):",
-                countryData.getBorderingCountryData().size() > 0);
+                countryDataQueryResult.getBorderingCountryData() == null);
         Assert.assertTrue("HTTP body should not have the serialized continent data (test country):",
-                countryData.getContinentData() == null);
+                countryDataQueryResult.getContinentData() == null);
         Assert.assertTrue("HTTP body should not have the serialized city data (test country):",
-                countryData.getCityData() == null);
+                countryDataQueryResult.getCityData() == null);
         Assert.assertTrue("HTTP body should not have the serialized mountain data (test country):",
-                countryData.getMountainData() == null);
+                countryDataQueryResult.getMountainData() == null);
         Assert.assertTrue("HTTP body should not have the serialized sea data (test country):",
-                countryData.getSeaData() == null);
+                countryDataQueryResult.getSeaData() == null);
         Assert.assertTrue("HTTP body should not have the serialized river data (test country):",
-                countryData.getRiverData() == null);
+                countryDataQueryResult.getRiverData() == null);
         Assert.assertTrue("HTTP body should not have the serialized island data (test country):",
-                countryData.getIslandData() == null);
+                countryDataQueryResult.getIslandData() == null);
         Assert.assertTrue("HTTP body should not have the serialized lake data (test country):",
-                countryData.getLakeData() == null);
+                countryDataQueryResult.getLakeData() == null);
         Assert.assertTrue("HTTP body should not have the serialized desert data (test country):",
-                countryData.getDesertData() == null);
+                countryDataQueryResult.getDesertData() == null);
     }
 
     @Test

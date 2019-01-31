@@ -1,5 +1,11 @@
-package edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api;
+package edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.unit;
 
+import edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.model.Country;
+import edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.model.CountryDataQuery;
+import edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.model.CountryDataQueryResult;
+import edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.model.CountryDataQueryResultPair;
+import edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.persistence.CountryPersistence;
+import edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.resource.CountryResource;
 import mockit.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -65,10 +71,12 @@ public class CountryResourceUnitTest {
     }
 
     @Test
-    public void testGetCountryQueryFromPersistenceWithAllData() throws Exception {
+    public void testGetCountryQueryFromPersistenceWithAllData(
+            @Mocked CountryDataQuery mockCountryDataQuery
+    ) throws Exception {
         CountryResource resource = new CountryResource();
 
-        CountryData mockCountryData = new CountryData()
+        CountryDataQueryResult mockCountryDataQueryResult = new CountryDataQueryResult()
                 .setCountry("Country")
                 .setPopulation(new BigDecimal(100)) // 100 people
                 .setArea(new BigDecimal(1.0)) // 1 square mile
@@ -83,35 +91,35 @@ public class CountryResourceUnitTest {
                 .setIndustryAsPercentOfGdp(new BigDecimal(25))
                 .setInflationRatePerAnnum(new BigDecimal(1.5)) // annual percent change in rate of inflation
                 .setTotalLengthOfBorder(new BigDecimal(1)) // 1 mile
-                .setLanguageData(new ArrayList<CountryDatum>(Stream.of(
-                        new CountryDatum()
+                .setLanguageData(new ArrayList<CountryDataQueryResultPair>(Stream.of(
+                        new CountryDataQueryResultPair()
                                 .setDatumName("Language 1")
                                 .setDatumValue(new BigDecimal(90)),
-                        new CountryDatum()
+                        new CountryDataQueryResultPair()
                                 .setDatumName("Language 2")
                                 .setDatumValue(new BigDecimal(10))
                 ).collect(Collectors.toList())))
-                .setReligionData(new ArrayList<CountryDatum>(Stream.of(
-                        new CountryDatum()
+                .setReligionData(new ArrayList<CountryDataQueryResultPair>(Stream.of(
+                        new CountryDataQueryResultPair()
                                 .setDatumName("Religion 1")
                                 .setDatumValue(new BigDecimal(25)),
-                        new CountryDatum()
+                        new CountryDataQueryResultPair()
                                 .setDatumName("Religion 2")
                                 .setDatumValue(new BigDecimal(75))
                 ).collect(Collectors.toList())))
-                .setEthnicityData(new ArrayList<CountryDatum>(Stream.of(
-                        new CountryDatum()
+                .setEthnicityData(new ArrayList<CountryDataQueryResultPair>(Stream.of(
+                        new CountryDataQueryResultPair()
                                 .setDatumName("Ethnicity 1")
                                 .setDatumValue(new BigDecimal(25)),
-                        new CountryDatum()
+                        new CountryDataQueryResultPair()
                                 .setDatumName("Ethnicity 2")
                                 .setDatumValue(new BigDecimal(75))
                 ).collect(Collectors.toList())))
-                .setBorderingCountryData(new ArrayList<CountryDatum>(Stream.of(
-                        new CountryDatum()
+                .setBorderingCountryData(new ArrayList<CountryDataQueryResultPair>(Stream.of(
+                        new CountryDataQueryResultPair()
                                 .setDatumName("Bordering Country 1")
                                 .setDatumValue(new BigDecimal(1)), // 1 mile
-                        new CountryDatum()
+                        new CountryDataQueryResultPair()
                                 .setDatumName("Bordering Country 2")
                                 .setDatumValue(new BigDecimal(1))
                 ).collect(Collectors.toList())))
@@ -140,156 +148,59 @@ public class CountryResourceUnitTest {
                         "Desert 1"
                 ).collect(Collectors.toList())));
 
-        new Expectations(CountryPersistence.class) {{
-            CountryPersistence.getCountryData(
-                    "C",
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true);
-
-            result = mockCountryData;
+        new Expectations() {{
+            mockCountryDataQuery._withAllFields();
         }};
 
-        CountryData result = resource.get("C", "");
+        new Expectations(CountryPersistence.class) {{
+            CountryPersistence.getCountryData("C", mockCountryDataQuery);
+            result = mockCountryDataQueryResult;
+        }};
+
+        CountryDataQueryResult result = resource.get("C", "");
 
         new Verifications() {{
-            CountryPersistence.getCountryData(
-                    "C",
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true,
-                    true);
+            CountryPersistence.getCountryData("C", mockCountryDataQuery);
             times = 1;
         }};
 
         Assert.assertEquals("Should return all query data for the specified country from persistence:",
-                mockCountryData, result);
+                mockCountryDataQueryResult, result);
     }
 
     @Test
-    public void testGetCountryQueryFromPersistenceWithSomeData() throws Exception {
+    public void testGetCountryQueryFromPersistenceWithSomeData(
+            @Mocked CountryDataQuery mockCountryDataQuery
+    ) throws Exception {
         CountryResource resource = new CountryResource();
 
-        CountryData mockCountryData = new CountryData()
+        CountryDataQueryResult mockCountryDataQueryResult = new CountryDataQueryResult()
                 .setPopulation(new BigDecimal(1000000))
                 .setLanguageData(Stream.of(
-                        new CountryDatum()
+                        new CountryDataQueryResultPair()
                             .setDatumName("Language 1")
                             .setDatumValue(new BigDecimal(100))
                 ).collect(Collectors.toList()));
 
-        new Expectations(CountryPersistence.class) {{
-           CountryPersistence.getCountryData(
-                   "C1",
-                   true,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   true,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false,
-                   false
-           );
-
-           result = mockCountryData;
+        new Expectations() {{
+            mockCountryDataQuery.withPopulation(true);
+            mockCountryDataQuery.withLanguageData(true);
+            mockCountryDataQuery._withRest(false);
         }};
 
-        CountryData result = resource.get("C1", "population,languageData");
+        new Expectations(CountryPersistence.class) {{
+            CountryPersistence.getCountryData("C1", (CountryDataQuery) any);
+            result = mockCountryDataQueryResult;
+        }};
+
+        CountryDataQueryResult result = resource.get("C1", "population,languageData");
 
         new Verifications() {{
-            CountryPersistence.getCountryData(
-                    "C1",
-                    true,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    false
-            );
-
+            CountryPersistence.getCountryData("C1", (CountryDataQuery) any);
             times = 1;
         }};
 
         Assert.assertEquals("Should return only query data specified for the specified country from persistence:",
-                mockCountryData, result);
+                mockCountryDataQueryResult, result);
     }
 }

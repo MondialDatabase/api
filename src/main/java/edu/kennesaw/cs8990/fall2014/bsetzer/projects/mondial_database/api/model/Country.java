@@ -1,4 +1,4 @@
-package edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api;
+package edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.model;
 
 import java.math.BigDecimal;
 

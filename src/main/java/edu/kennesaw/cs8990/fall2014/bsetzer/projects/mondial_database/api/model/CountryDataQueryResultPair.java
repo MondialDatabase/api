@@ -1,8 +1,8 @@
-package edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api;
+package edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.model;
 
 import java.math.BigDecimal;
 
-public class CountryDatum {
+public class CountryDataQueryResultPair {
     private String datumName;
     private BigDecimal datumValue;
 
@@ -10,7 +10,7 @@ public class CountryDatum {
         return this.datumName;
     }
 
-    public CountryDatum setDatumName(String datumName) {
+    public CountryDataQueryResultPair setDatumName(String datumName) {
         this.datumName = datumName;
         return this;
     }
@@ -19,7 +19,7 @@ public class CountryDatum {
         return this.datumValue;
     }
 
-    public CountryDatum setDatumValue(BigDecimal datumValue) {
+    public CountryDataQueryResultPair setDatumValue(BigDecimal datumValue) {
         this.datumValue = datumValue;
         return this;
     }

@@ -1,9 +1,9 @@
-package edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api;
+package edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api.model;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class CountryData {
+public class CountryDataQueryResult {
     private String country;
     private BigDecimal population;
     private BigDecimal area;
@@ -18,10 +18,10 @@ public class CountryData {
     private BigDecimal industryAsPercentOfGdp;
     private BigDecimal inflationRatePerAnnum;
     private BigDecimal totalLengthOfBorder;
-    private List<CountryDatum> languageData;
-    private List<CountryDatum> religionData;
-    private List<CountryDatum> ethnicityData;
-    private List<CountryDatum> borderingCountryData;
+    private List<CountryDataQueryResultPair> languageData;
+    private List<CountryDataQueryResultPair> religionData;
+    private List<CountryDataQueryResultPair> ethnicityData;
+    private List<CountryDataQueryResultPair> borderingCountryData;
     private List<String> continentData;
     private List<String> cityData;
     private List<String> mountainData;
@@ -34,8 +34,7 @@ public class CountryData {
     public String getCountry() {
         return this.country;
     }
-
-    public CountryData setCountry(String country) {
+    public CountryDataQueryResult setCountry(String country) {
         this.country = country;
         return this;
     }
@@ -43,8 +42,7 @@ public class CountryData {
     public BigDecimal getPopulation() {
         return this.population;
     }
-
-    public CountryData setPopulation(BigDecimal population) {
+    public CountryDataQueryResult setPopulation(BigDecimal population) {
         this.population = population;
         return this;
     }
@@ -52,8 +50,7 @@ public class CountryData {
     public BigDecimal getArea() {
         return this.area;
     }
-
-    public CountryData setArea(BigDecimal area) {
+    public CountryDataQueryResult setArea(BigDecimal area) {
         this.area = area;
         return this;
     }
@@ -61,8 +58,7 @@ public class CountryData {
     public String getCapital() {
         return this.capital;
     }
-
-    public CountryData setCapital(String capital) {
+    public CountryDataQueryResult setCapital(String capital) {
         this.capital = capital;
         return this;
     }
@@ -70,8 +66,7 @@ public class CountryData {
     public BigDecimal getInfantMortality() {
         return this.infantMortality;
     }
-
-    public CountryData setInfantMortality(BigDecimal infantMortality) {
+    public CountryDataQueryResult setInfantMortality(BigDecimal infantMortality) {
         this.infantMortality = infantMortality;
         return this;
     }
@@ -79,8 +74,7 @@ public class CountryData {
     public BigDecimal getPopulationGrowthRate() {
         return this.populationGrowthRate;
     }
-
-    public CountryData setPopulationGrowthRate(BigDecimal populationGrowthRate) {
+    public CountryDataQueryResult setPopulationGrowthRate(BigDecimal populationGrowthRate) {
         this.populationGrowthRate = populationGrowthRate;
         return this;
     }
@@ -88,8 +82,7 @@ public class CountryData {
     public String getGovernment() {
         return this.government;
     }
-
-    public CountryData setGovernment(String government) {
+    public CountryDataQueryResult setGovernment(String government) {
         this.government = government;
         return this;
     }
@@ -97,8 +90,7 @@ public class CountryData {
     public String getIndependenceData() {
         return this.independenceData;
     }
-
-    public CountryData setIndependenceData(String independenceData) {
+    public CountryDataQueryResult setIndependenceData(String independenceData) {
         this.independenceData = independenceData;
         return this;
     }
@@ -106,8 +98,7 @@ public class CountryData {
     public BigDecimal getGdpInMillionsUsd() {
         return this.gdpInMillionsUsd;
     }
-
-    public CountryData setGdpInMillionsUsd(BigDecimal gdpInMillionsUsd) {
+    public CountryDataQueryResult setGdpInMillionsUsd(BigDecimal gdpInMillionsUsd) {
         this.gdpInMillionsUsd = gdpInMillionsUsd;
         return this;
     }
@@ -115,8 +106,7 @@ public class CountryData {
     public BigDecimal getAgricultureAsPercentOfGdp() {
         return this.agricultureAsPercentOfGdp;
     }
-
-    public CountryData setAgricultureAsPercentOfGdp(BigDecimal agricultureAsPercentOfGdp) {
+    public CountryDataQueryResult setAgricultureAsPercentOfGdp(BigDecimal agricultureAsPercentOfGdp) {
         this.agricultureAsPercentOfGdp = agricultureAsPercentOfGdp;
         return this;
     }
@@ -124,8 +114,7 @@ public class CountryData {
     public BigDecimal getServiceAsPercentOfGdp() {
         return this.serviceAsPercentOfGdp;
     }
-
-    public CountryData setServiceAsPercentOfGdp(BigDecimal serviceAsPercentOfGdp) {
+    public CountryDataQueryResult setServiceAsPercentOfGdp(BigDecimal serviceAsPercentOfGdp) {
         this.serviceAsPercentOfGdp = serviceAsPercentOfGdp;
         return this;
     }
@@ -133,8 +122,7 @@ public class CountryData {
     public BigDecimal getIndustryAsPercentOfGdp() {
         return this.industryAsPercentOfGdp;
     }
-
-    public CountryData setIndustryAsPercentOfGdp(BigDecimal industryAsPercentOfGdp) {
+    public CountryDataQueryResult setIndustryAsPercentOfGdp(BigDecimal industryAsPercentOfGdp) {
         this.industryAsPercentOfGdp = industryAsPercentOfGdp;
         return this;
     }
@@ -142,8 +130,7 @@ public class CountryData {
     public BigDecimal getInflationRatePerAnnum() {
         return this.inflationRatePerAnnum;
     }
-
-    public CountryData setInflationRatePerAnnum(BigDecimal inflationRatePerAnnum) {
+    public CountryDataQueryResult setInflationRatePerAnnum(BigDecimal inflationRatePerAnnum) {
         this.inflationRatePerAnnum = inflationRatePerAnnum;
         return this;
     }
@@ -151,44 +138,39 @@ public class CountryData {
     public BigDecimal getTotalLengthOfBorder() {
         return this.totalLengthOfBorder;
     }
-
-    public CountryData setTotalLengthOfBorder(BigDecimal totalLengthOfBorder) {
+    public CountryDataQueryResult setTotalLengthOfBorder(BigDecimal totalLengthOfBorder) {
         this.totalLengthOfBorder = totalLengthOfBorder;
         return this;
     }
 
-    public List<CountryDatum> getLanguageData() {
+    public List<CountryDataQueryResultPair> getLanguageData() {
         return this.languageData;
     }
-
-    public CountryData setLanguageData(List<CountryDatum> languageData) {
+    public CountryDataQueryResult setLanguageData(List<CountryDataQueryResultPair> languageData) {
         this.languageData = languageData;
         return this;
     }
 
-    public List<CountryDatum> getReligionData() {
+    public List<CountryDataQueryResultPair> getReligionData() {
         return this.religionData;
     }
-
-    public CountryData setReligionData(List<CountryDatum> religionData) {
+    public CountryDataQueryResult setReligionData(List<CountryDataQueryResultPair> religionData) {
         this.religionData = religionData;
         return this;
     }
 
-    public List<CountryDatum> getEthnicityData() {
+    public List<CountryDataQueryResultPair> getEthnicityData() {
         return this.ethnicityData;
     }
-
-    public CountryData setEthnicityData(List<CountryDatum> ethnicityData) {
+    public CountryDataQueryResult setEthnicityData(List<CountryDataQueryResultPair> ethnicityData) {
         this.ethnicityData = ethnicityData;
         return this;
     }
 
-    public List<CountryDatum> getBorderingCountryData() {
+    public List<CountryDataQueryResultPair> getBorderingCountryData() {
         return this.borderingCountryData;
     }
-
-    public CountryData setBorderingCountryData(List<CountryDatum> borderingCountryData) {
+    public CountryDataQueryResult setBorderingCountryData(List<CountryDataQueryResultPair> borderingCountryData) {
         this.borderingCountryData = borderingCountryData;
         return this;
     }
@@ -197,7 +179,7 @@ public class CountryData {
         return this.continentData;
     }
 
-    public CountryData setContinentData(List<String> continentData) {
+    public CountryDataQueryResult setContinentData(List<String> continentData) {
         this.continentData = continentData;
         return this;
     }
@@ -205,8 +187,7 @@ public class CountryData {
     public List<String> getCityData() {
         return this.cityData;
     }
-
-    public CountryData setCityData(List<String> cityData) {
+    public CountryDataQueryResult setCityData(List<String> cityData) {
         this.cityData = cityData;
         return this;
     }
@@ -214,8 +195,7 @@ public class CountryData {
     public List<String> getMountainData() {
         return this.mountainData;
     }
-
-    public CountryData setMountainData(List<String> mountainData) {
+    public CountryDataQueryResult setMountainData(List<String> mountainData) {
         this.mountainData = mountainData;
         return this;
     }
@@ -223,8 +203,7 @@ public class CountryData {
     public List<String> getSeaData() {
         return this.seaData;
     }
-
-    public CountryData setSeaData(List<String> seaData) {
+    public CountryDataQueryResult setSeaData(List<String> seaData) {
         this.seaData = seaData;
         return this;
     }
@@ -232,8 +211,7 @@ public class CountryData {
     public List<String> getRiverData() {
         return this.riverData;
     }
-
-    public CountryData setRiverData(List<String> riverData) {
+    public CountryDataQueryResult setRiverData(List<String> riverData) {
         this.riverData = riverData;
         return this;
     }
@@ -241,8 +219,7 @@ public class CountryData {
     public List<String> getIslandData() {
         return this.islandData;
     }
-
-    public CountryData setIslandData(List<String> islandData) {
+    public CountryDataQueryResult setIslandData(List<String> islandData) {
         this.islandData = islandData;
         return this;
     }
@@ -250,8 +227,7 @@ public class CountryData {
     public List<String> getLakeData() {
         return this.lakeData;
     }
-
-    public CountryData setLakeData(List<String> lakeData) {
+    public CountryDataQueryResult setLakeData(List<String> lakeData) {
         this.lakeData = lakeData;
         return this;
     }
@@ -259,8 +235,7 @@ public class CountryData {
     public List<String> getDesertData() {
         return this.desertData;
     }
-
-    public CountryData setDesertData(List<String> desertData) {
+    public CountryDataQueryResult setDesertData(List<String> desertData) {
         this.desertData = desertData;
         return this;
     }

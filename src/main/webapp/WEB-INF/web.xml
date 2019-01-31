@@ -7,7 +7,9 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api</param-value>
+            <param-value>
+                edu.kennesaw.cs8990.fall2014.bsetzer.projects.mondial_database.api
+            </param-value>
         </init-param>
         <init-param>
             <param-name>jersey.config.server.provider.classnames</param-name>
