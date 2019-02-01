@@ -18,13 +18,13 @@ For serving the Web API for use with web clients:
 1. Install Docker CE.
 2. Change into the project directory.
 3. Run `sh build-api.sh` to build the project source code.
-4. Run `docker-compose -p mondial up --build` to start the web services.
+4. Run `docker-compose up --build` to start the web services.
 
 Note that a database connection will be needed for most, if not all, API functionality
 to work. The Web API expects the database to be available under the hostname `db-server`,
 on port `5432`, with a username and database name of `postgres`.
 
-To shut down the web services, run `docker-compose -p mondial down`.
+To shut down the web services, run `docker-compose down`.
 
 ## Running Tests for the Web API
 
