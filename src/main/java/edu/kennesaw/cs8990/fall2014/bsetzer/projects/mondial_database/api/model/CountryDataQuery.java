@@ -178,67 +178,67 @@ public class CountryDataQuery {
         return this;
     }
 
-    public boolean withReligionData() { return this.languageData; }
+    public boolean withReligionData() { return this.religionData; }
     public CountryDataQuery withReligionData(boolean value) {
         this.religionData = value;
         return this;
     }
 
-    public boolean withEthnicityData() { return this.languageData; }
+    public boolean withEthnicityData() { return this.ethnicityData; }
     public CountryDataQuery withEthnicityData(boolean value) {
         this.ethnicityData = value;
         return this;
     }
 
-    public boolean withBorderingCountryData() { return this.languageData; }
+    public boolean withBorderingCountryData() { return this.borderingCountryData; }
     public CountryDataQuery withBorderingCountryData(boolean value) {
         this.borderingCountryData = value;
         return this;
     }
 
-    public boolean withContinentData() { return this.languageData; }
+    public boolean withContinentData() { return this.continentData; }
     public CountryDataQuery withContinentData(boolean value) {
         this.continentData = value;
         return this;
     }
 
-    public boolean withCityData() { return this.languageData; }
+    public boolean withCityData() { return this.cityData; }
     public CountryDataQuery withCityData(boolean value) {
         this.cityData = value;
         return this;
     }
 
-    public boolean withMountainData() { return this.languageData; }
+    public boolean withMountainData() { return this.mountainData; }
     public CountryDataQuery withMountainData(boolean value) {
         this.mountainData = value;
         return this;
     }
 
-    public boolean withSeaData() { return this.languageData; }
+    public boolean withSeaData() { return this.seaData; }
     public CountryDataQuery withSeaData(boolean value) {
         this.seaData = value;
         return this;
     }
 
-    public boolean withRiverData() { return this.languageData; }
+    public boolean withRiverData() { return this.riverData; }
     public CountryDataQuery withRiverData(boolean value) {
         this.riverData = value;
         return this;
     }
 
-    public boolean withIslandData() { return this.languageData; }
+    public boolean withIslandData() { return this.islandData; }
     public CountryDataQuery withIslandData(boolean value) {
         this.islandData = value;
         return this;
     }
 
-    public boolean withLakeData() { return this.languageData; }
+    public boolean withLakeData() { return this.lakeData; }
     public CountryDataQuery withLakeData(boolean value) {
         this.lakeData = value;
         return this;
     }
 
-    public boolean withDesertData() { return this.languageData; }
+    public boolean withDesertData() { return this.desertData; }
     public CountryDataQuery withDesertData(boolean value) {
         this.desertData = value;
         return this;

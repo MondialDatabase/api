@@ -215,11 +215,152 @@ public class CountryPersistence {
                 groupByClause);
     }
 
+    private static CountryDataQueryResult getDataQueryResult(
+            String countryCode,
+            CountryDataQuery query,
+            ResultSet resultSet
+    ) throws Exception {
+        CountryDataQueryResult queryResult = new CountryDataQueryResult();
+
+        if (query.withCountry()) {
+            queryResult.setCountry(resultSet.getString("country_name"));
+        }
+
+        if (query.withPopulation()) {
+            queryResult.setPopulation(resultSet.getBigDecimal("country_population"));
+        }
+
+        if (query.withArea()) {
+            queryResult.setArea(resultSet.getBigDecimal("country_area"));
+        }
+
+        if (query.withCapital()) {
+            queryResult.setCapital(resultSet.getString("country_capital"));
+        }
+
+        if (query.withInfantMortality()) {
+            queryResult.setInfantMortality(resultSet.getBigDecimal("country_population_infant_mortality"));
+        }
+
+        if (query.withPopulationGrowthRate()) {
+            queryResult.setPopulationGrowthRate(resultSet.getBigDecimal("country_population_growth"));
+        }
+
+        if (query.withGovernment()) {
+            queryResult.setGovernment(resultSet.getString("country_political_government"));
+        }
+
+        if (query.withIndependenceData()) {
+            String dependent = resultSet.getString("country_political_dependency");
+            if (dependent == null) {
+                queryResult.setIndependenceData(resultSet.getString("country_political_independence"));
+            } else {
+                queryResult.setIndependenceData(dependent);
+            }
+        }
+
+        if (query.withGdpInMillionsUsd()) {
+            queryResult.setGdpInMillionsUsd(resultSet.getBigDecimal("country_economy_gdp"));
+        }
+
+        if (query.withAgricultureAsPercentOfGdp()) {
+            queryResult.setAgricultureAsPercentOfGdp(resultSet.getBigDecimal("country_economy_agriculture"));
+        }
+
+        if (query.withServiceAsPercentOfGdp()) {
+            queryResult.setServiceAsPercentOfGdp(resultSet.getBigDecimal("country_economy_service"));
+        }
+
+        if (query.withIndustryAsPercentOfGdp()) {
+            queryResult.setIndustryAsPercentOfGdp(resultSet.getBigDecimal("country_economy_industry"));
+        }
+
+        if (query.withInflationRatePerAnnum()) {
+            queryResult.setInflationRatePerAnnum(resultSet.getBigDecimal("country_economy_inflation"));
+        }
+
+        if (query.withTotalLengthOfBorder()) {
+            queryResult.setTotalLengthOfBorder(resultSet.getBigDecimal("country_border_length"));
+        }
+
+        if (query.withBorderingCountryData()) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            queryResult.setBorderingCountryData(objectMapper.readValue(
+                    resultSet.getString("country_bordering_countries"),
+                    new TypeReference<List<CountryDataQueryResultPair>>(){}));
+        }
+
+        if (query.withLanguageData()) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            queryResult.setLanguageData(objectMapper.readValue(
+                    resultSet.getString("country_languages"),
+                    new TypeReference<List<CountryDataQueryResultPair>>(){}));
+        }
+
+        if (query.withReligionData()) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            queryResult.setReligionData(objectMapper.readValue(
+                    resultSet.getString("country_religions"),
+                    new TypeReference<List<CountryDataQueryResultPair>>(){}));
+        }
+
+        if (query.withEthnicityData()) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            queryResult.setEthnicityData(objectMapper.readValue(
+                    resultSet.getString("country_ethnicities"),
+                    new TypeReference<List<CountryDataQueryResultPair>>(){}));
+        }
+
+        if (query.withContinentData()) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            queryResult.setContinentData(objectMapper.readValue(
+                    resultSet.getString("country_continents"),
+                    new TypeReference<List<String>>(){}));
+        }
+
+        if (query.withCityData()) {
+            queryResult.setCityData(CountryPersistence
+                    .getGeographyInCountry(countryCode, "city", "name"));
+        }
+
+        if (query.withMountainData()) {
+            queryResult.setMountainData(CountryPersistence
+                    .getGeographyInCountry(countryCode, "geo_mountain", "mountain"));
+        }
+
+        if (query.withSeaData()) {
+            queryResult.setSeaData(CountryPersistence
+                    .getGeographyInCountry(countryCode, "geo_sea", "sea"));
+        }
+
+        if (query.withRiverData()) {
+            queryResult.setRiverData(CountryPersistence
+                    .getGeographyInCountry(countryCode, "geo_river", "river"));
+        }
+
+        if (query.withIslandData()) {
+            queryResult.setIslandData(CountryPersistence
+                    .getGeographyInCountry(countryCode, "geo_island", "island"));
+        }
+
+        if (query.withLakeData()) {
+            queryResult.setLakeData(CountryPersistence
+                    .getGeographyInCountry(countryCode, "geo_lake", "lake"));
+        }
+
+        if (query.withDesertData()) {
+            queryResult.setDesertData(CountryPersistence
+                    .getGeographyInCountry(countryCode, "geo_desert", "desert"));
+        }
+
+        return queryResult;
+    }
+
     public static CountryDataQueryResult getCountryData(
             String countryCode,
             CountryDataQuery countryDataQuery
     ) throws Exception {
-        CountryDataQueryResult data;
+        CountryDataQueryResult queryResult;
         String sqlQuery = CountryPersistence.createSQLQueryStringForRetrievingCountryData(countryDataQuery);
 
         Class.forName(SQLDriverClassPath);
@@ -234,141 +375,10 @@ public class CountryPersistence {
                     throw new NotFoundException();
                 }
 
-                data = new CountryDataQueryResult();
-
-                if (countryDataQuery.withCountry()) {
-                    data.setCountry(resultSet.getString("country_name"));
-                }
-
-                if (countryDataQuery.withPopulation()) {
-                    data.setPopulation(resultSet.getBigDecimal("country_population"));
-                }
-
-                if (countryDataQuery.withArea()) {
-                    data.setArea(resultSet.getBigDecimal("country_area"));
-                }
-
-                if (countryDataQuery.withCapital()) {
-                    data.setCapital(resultSet.getString("country_capital"));
-                }
-
-                if (countryDataQuery.withInfantMortality()) {
-                    data.setInfantMortality(resultSet.getBigDecimal("country_population_infant_mortality"));
-                }
-
-                if (countryDataQuery.withPopulationGrowthRate()) {
-                    data.setPopulationGrowthRate(resultSet.getBigDecimal("country_population_growth"));
-                }
-
-                if (countryDataQuery.withGovernment()) {
-                    data.setGovernment(resultSet.getString("country_political_government"));
-                }
-
-                if (countryDataQuery.withIndependenceData()) {
-                    String dependent = resultSet.getString("country_political_dependency");
-                    if (dependent == null) {
-                        data.setIndependenceData(resultSet.getString("country_political_independence"));
-                    } else {
-                        data.setIndependenceData(dependent);
-                    }
-                }
-
-                if (countryDataQuery.withGdpInMillionsUsd()) {
-                    data.setGdpInMillionsUsd(resultSet.getBigDecimal("country_economy_gdp"));
-                }
-
-                if (countryDataQuery.withAgricultureAsPercentOfGdp()) {
-                    data.setAgricultureAsPercentOfGdp(resultSet.getBigDecimal("country_economy_agriculture"));
-                }
-
-                if (countryDataQuery.withServiceAsPercentOfGdp()) {
-                    data.setServiceAsPercentOfGdp(resultSet.getBigDecimal("country_economy_service"));
-                }
-
-                if (countryDataQuery.withIndustryAsPercentOfGdp()) {
-                    data.setIndustryAsPercentOfGdp(resultSet.getBigDecimal("country_economy_industry"));
-                }
-
-                if (countryDataQuery.withInflationRatePerAnnum()) {
-                    data.setInflationRatePerAnnum(resultSet.getBigDecimal("country_economy_inflation"));
-                }
-
-                if (countryDataQuery.withTotalLengthOfBorder()) {
-                    data.setTotalLengthOfBorder(resultSet.getBigDecimal("country_border_length"));
-                }
-
-                if (countryDataQuery.withBorderingCountryData()) {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    data.setBorderingCountryData(objectMapper.readValue(
-                            resultSet.getString("country_bordering_countries"),
-                            new TypeReference<List<CountryDataQueryResultPair>>(){}));
-                }
-
-                if (countryDataQuery.withLanguageData()) {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    data.setLanguageData(objectMapper.readValue(
-                            resultSet.getString("country_languages"),
-                            new TypeReference<List<CountryDataQueryResultPair>>(){}));
-                }
-
-                if (countryDataQuery.withReligionData()) {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    data.setReligionData(objectMapper.readValue(
-                            resultSet.getString("country_religions"),
-                            new TypeReference<List<CountryDataQueryResultPair>>(){}));
-                }
-
-                if (countryDataQuery.withEthnicityData()) {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    data.setEthnicityData(objectMapper.readValue(
-                            resultSet.getString("country_ethnicities"),
-                            new TypeReference<List<CountryDataQueryResultPair>>(){}));
-                }
-
-                if (countryDataQuery.withContinentData()) {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    data.setContinentData(objectMapper.readValue(
-                            resultSet.getString("country_continents"),
-                            new TypeReference<List<String>>(){}));
-                }
-
-                if (countryDataQuery.withCityData()) {
-                    data.setCityData(CountryPersistence
-                            .getGeographyInCountry(countryCode, "city", "name"));
-                }
-
-                if (countryDataQuery.withMountainData()) {
-                    data.setMountainData(CountryPersistence
-                            .getGeographyInCountry(countryCode, "geo_mountain", "mountain"));
-                }
-
-                if (countryDataQuery.withSeaData()) {
-                    data.setSeaData(CountryPersistence
-                            .getGeographyInCountry(countryCode, "geo_sea", "sea"));
-                }
-
-                if (countryDataQuery.withRiverData()) {
-                    data.setRiverData(CountryPersistence
-                            .getGeographyInCountry(countryCode, "geo_river", "river"));
-                }
-
-                if (countryDataQuery.withIslandData()) {
-                    data.setIslandData(CountryPersistence
-                            .getGeographyInCountry(countryCode, "geo_island", "island"));
-                }
-
-                if (countryDataQuery.withLakeData()) {
-                    data.setLakeData(CountryPersistence
-                            .getGeographyInCountry(countryCode, "geo_lake", "lake"));
-                }
-
-                if (countryDataQuery.withDesertData()) {
-                    data.setDesertData(CountryPersistence
-                            .getGeographyInCountry(countryCode, "geo_desert", "desert"));
-                }
+                queryResult = CountryPersistence.getDataQueryResult(countryCode, countryDataQuery, resultSet);
             }
         }
 
-        return data;
+        return queryResult;
     }
 }

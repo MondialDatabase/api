@@ -362,7 +362,7 @@ public class CountryResourceIntegrationTest extends JerseyTest {
         Assert.assertTrue("HTTP body should not have the serialized ethnicity data (test country):",
                 countryDataQueryResult.getEthnicityData() == null);
         Assert.assertTrue("HTTP body should have the serialized bordering country data (test country):",
-                countryDataQueryResult.getBorderingCountryData() == null);
+                countryDataQueryResult.getBorderingCountryData().size() > 0);
         Assert.assertTrue("HTTP body should not have the serialized continent data (test country):",
                 countryDataQueryResult.getContinentData() == null);
         Assert.assertTrue("HTTP body should not have the serialized city data (test country):",
